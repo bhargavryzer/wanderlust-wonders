@@ -16,9 +16,9 @@ const Partners = () => {
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section className="py-24 px-6">
+    <section className="py-24 px-6 bg-background">
       <div className="container mx-auto" ref={ref}>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-5xl mx-auto">
           {partners.map((partner, index) => (
             <motion.div 
               key={partner.name}
@@ -26,7 +26,7 @@ const Partners = () => {
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.5, delay: index * 0.08 }}
               whileHover={{ y: -5, scale: 1.02 }}
-              className="p-6 rounded-lg bg-card border border-border/30 hover:border-border hover:shadow-lg transition-all duration-300"
+              className="p-6 rounded-xl bg-card hover:shadow-md transition-all duration-300"
             >
               <span className="text-xs text-muted-foreground uppercase tracking-wider">
                 {partner.category}

@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import architectureVisual from "@/assets/architecture-visual.jpg";
 
 const layers = [
   "Asset Origination",
@@ -23,7 +22,7 @@ const Architecture = () => {
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section id="architecture" className="py-24 px-6">
+    <section id="architecture" className="py-24 px-6 bg-background">
       <div className="container mx-auto">
         <motion.div 
           ref={ref}
@@ -38,41 +37,25 @@ const Architecture = () => {
           <p className="text-lg text-muted-foreground mb-6">
             Praxis delivers a complete institutional stack spanning legal, technical, and operational layers. From origination to settlement, every step is rigorously engineered for regulated markets.
           </p>
+          <p className="text-muted-foreground">
+            Key layers include Asset Origination, Legal Frameworks, IAM, Compliance, Tokenisation, Privacy, Governance, Settlement, Custody, Audit, Integration, and User Experience. Each layer is purpose-built for secure, compliant operations.
+          </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto items-center">
-          {/* Architecture image */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative"
-          >
-            <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl">
-              <img 
-                src={architectureVisual} 
-                alt="Praxis 12-Layer Architecture visualization" 
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-primary/10 rounded-full blur-3xl" />
-          </motion.div>
-
-          {/* Layers grid */}
-          <div className="grid grid-cols-3 gap-3">
-            {layers.map((layer, i) => (
-              <motion.div 
-                key={layer}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-                transition={{ duration: 0.4, delay: 0.3 + i * 0.05 }}
-                whileHover={{ scale: 1.05, y: -3 }}
-                className="p-4 bg-card border border-border/50 rounded-lg flex items-center justify-center text-center hover:bg-secondary/50 hover:border-border transition-all duration-300 hover:shadow-md"
-              >
-                <span className="text-xs md:text-sm font-medium text-foreground/80">{layer}</span>
-              </motion.div>
-            ))}
-          </div>
+        {/* Layers grid */}
+        <div className="grid grid-cols-3 md:grid-cols-4 gap-3 max-w-4xl mx-auto">
+          {layers.map((layer, i) => (
+            <motion.div 
+              key={layer}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.4, delay: 0.2 + i * 0.05 }}
+              whileHover={{ scale: 1.05, y: -3 }}
+              className="p-4 bg-card rounded-xl flex items-center justify-center text-center hover:shadow-md transition-all duration-300"
+            >
+              <span className="text-xs md:text-sm font-medium text-foreground/80">{layer}</span>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
