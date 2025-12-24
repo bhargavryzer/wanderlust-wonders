@@ -1,3 +1,7 @@
+import { motion } from "framer-motion";
+import { useInView } from "framer-motion";
+import { useRef } from "react";
+
 const partners = [
   { category: "Modernising Infrastructure", name: "Banks & Asset Managers" },
   { category: "Regulatory Pilots", name: "Regulators" },
@@ -8,15 +12,21 @@ const partners = [
 ];
 
 const Partners = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+
   return (
     <section className="py-24 px-6">
-      <div className="container mx-auto">
+      <div className="container mx-auto" ref={ref}>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {partners.map((partner, index) => (
-            <div 
+            <motion.div 
               key={partner.name}
-              className="p-6 rounded-lg bg-card border border-border/30 hover:border-border hover:shadow-md transition-all duration-300 animate-fade-up"
-              style={{ animationDelay: `${index * 50}ms` }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.5, delay: index * 0.08 }}
+              whileHover={{ y: -5, scale: 1.02 }}
+              className="p-6 rounded-lg bg-card border border-border/30 hover:border-border hover:shadow-lg transition-all duration-300"
             >
               <span className="text-xs text-muted-foreground uppercase tracking-wider">
                 {partner.category}
@@ -24,7 +34,7 @@ const Partners = () => {
               <p className="font-medium mt-2 text-foreground/90">
                 {partner.name}
               </p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

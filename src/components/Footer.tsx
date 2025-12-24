@@ -1,6 +1,22 @@
+import { motion } from "framer-motion";
+
 const Footer = () => {
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    e.preventDefault();
+    const element = document.getElementById(targetId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
-    <footer className="py-16 px-6 border-t border-border/50">
+    <motion.footer 
+      className="py-16 px-6 border-t border-border/50"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+    >
       <div className="container mx-auto">
         <div className="grid md:grid-cols-3 gap-12 max-w-5xl mx-auto">
           {/* Logo */}
@@ -15,17 +31,29 @@ const Footer = () => {
             <h4 className="font-medium mb-4">Product</h4>
             <ul className="space-y-3">
               <li>
-                <a href="#why" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
+                <a 
+                  href="#why" 
+                  onClick={(e) => handleSmoothScroll(e, "why")}
+                  className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                >
                   Why Praxis
                 </a>
               </li>
               <li>
-                <a href="#architecture" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
+                <a 
+                  href="#architecture" 
+                  onClick={(e) => handleSmoothScroll(e, "architecture")}
+                  className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                >
                   Architecture
                 </a>
               </li>
               <li>
-                <a href="#demo" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
+                <a 
+                  href="#demo" 
+                  onClick={(e) => handleSmoothScroll(e, "demo")}
+                  className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                >
                   Request Demo
                 </a>
               </li>
@@ -55,7 +83,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </footer>
+    </motion.footer>
   );
 };
 
