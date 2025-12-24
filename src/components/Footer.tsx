@@ -11,7 +11,7 @@ const Footer = () => {
 
   return (
     <motion.footer 
-      className="py-16 px-6 border-t border-border/50"
+      className="py-16 px-6 border-t border-border/30 bg-background"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
@@ -21,14 +21,14 @@ const Footer = () => {
         <div className="grid md:grid-cols-3 gap-12 max-w-5xl mx-auto">
           {/* Logo */}
           <div>
-            <a href="/" className="font-serif text-xl font-bold tracking-tight">
-              Praxis<sup className="text-xs">®</sup>
+            <a href="/" className="font-serif text-lg font-normal tracking-tight">
+              Praxis<sup className="text-[10px]">®</sup>
             </a>
           </div>
           
           {/* Product links */}
           <div>
-            <h4 className="font-medium mb-4">Product</h4>
+            <h4 className="font-medium mb-4 text-sm">Product</h4>
             <ul className="space-y-3">
               <li>
                 <a 
@@ -62,7 +62,7 @@ const Footer = () => {
           
           {/* Resources links */}
           <div>
-            <h4 className="font-medium mb-4">Resources</h4>
+            <h4 className="font-medium mb-4 text-sm">Resources</h4>
             <ul className="space-y-3">
               <li>
                 <a href="#" className="text-muted-foreground hover:text-foreground transition-colors text-sm">

@@ -1,25 +1,16 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import networkHero from "@/assets/network-hero.jpg";
 
 const CantonNetwork = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-24 px-6 bg-card relative overflow-hidden">
-      {/* Background image */}
-      <div className="absolute inset-0 z-0">
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-5"
-          style={{ backgroundImage: `url(${networkHero})` }}
-        />
-      </div>
-
+    <section className="py-24 px-6 bg-background">
       <motion.div 
         ref={ref}
-        className="container mx-auto text-center max-w-3xl relative z-10"
+        className="container mx-auto text-center max-w-3xl"
         initial={{ opacity: 0, y: 40 }}
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
         transition={{ duration: 0.7 }}
@@ -33,7 +24,13 @@ const CantonNetwork = () => {
           Built on the Canton Network
         </motion.h2>
         <motion.p 
-          className="text-lg text-muted-foreground"
+          className="text-lg md:text-xl font-serif italic"
+          style={{
+            background: 'linear-gradient(180deg, hsl(35 20% 55%) 0%, hsl(35 15% 75%) 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+          }}
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6, delay: 0.2 }}

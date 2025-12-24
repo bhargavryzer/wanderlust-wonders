@@ -1,25 +1,16 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import complianceVisual from "@/assets/compliance-visual.jpg";
 
 const SecuritySection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-24 px-6 bg-card relative overflow-hidden">
-      {/* Background image */}
-      <div className="absolute inset-0 z-0">
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-5"
-          style={{ backgroundImage: `url(${complianceVisual})` }}
-        />
-      </div>
-
+    <section className="py-24 px-6 bg-card">
       <motion.div 
         ref={ref}
-        className="container mx-auto text-center max-w-3xl relative z-10"
+        className="container mx-auto text-center max-w-3xl"
         initial={{ opacity: 0, y: 40 }}
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
         transition={{ duration: 0.7 }}

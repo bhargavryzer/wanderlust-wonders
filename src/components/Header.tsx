@@ -11,7 +11,7 @@ const Header = () => {
 
   return (
     <motion.header 
-      className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50"
+      className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-sm"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
@@ -20,31 +20,31 @@ const Header = () => {
         <nav className="flex items-center justify-between h-16">
           <motion.a 
             href="/" 
-            className="font-serif text-xl font-bold tracking-tight"
+            className="font-serif text-lg font-normal tracking-tight"
             whileHover={{ scale: 1.02 }}
           >
-            Praxis<sup className="text-xs">®</sup>
+            Praxis<sup className="text-[10px]">®</sup>
           </motion.a>
           
-          <div className="hidden md:flex items-center gap-10">
-            <motion.a 
-              href="#why" 
-              onClick={(e) => handleSmoothScroll(e, "why")}
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors relative group"
-              whileHover={{ y: -1 }}
-            >
-              Why Praxis
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-foreground transition-all duration-300 group-hover:w-full" />
-            </motion.a>
-            <motion.a 
-              href="#architecture" 
-              onClick={(e) => handleSmoothScroll(e, "architecture")}
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors relative group"
-              whileHover={{ y: -1 }}
-            >
-              Architecture
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-foreground transition-all duration-300 group-hover:w-full" />
-            </motion.a>
+          <div className="hidden md:flex items-center justify-center flex-1">
+            <div className="flex items-center gap-24">
+              <motion.a 
+                href="#why" 
+                onClick={(e) => handleSmoothScroll(e, "why")}
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                whileHover={{ y: -1 }}
+              >
+                Why Praxis
+              </motion.a>
+              <motion.a 
+                href="#architecture" 
+                onClick={(e) => handleSmoothScroll(e, "architecture")}
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                whileHover={{ y: -1 }}
+              >
+                Architecture
+              </motion.a>
+            </div>
           </div>
           
           <motion.a 
