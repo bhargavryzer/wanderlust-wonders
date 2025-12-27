@@ -1,15 +1,53 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const Hero = () => {
   const [activeTab, setActiveTab] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   const tabs = [
     "Trusted by Global Institutions",
     "Securing Digital Markets",
     "Partnerships for Innovation"
   ];
+
+  const carouselSlides = [
+    {
+      title: "Global Markets",
+      subtitle: "Real-time data synchronization",
+      stat: "50+",
+      statLabel: "Markets Connected"
+    },
+    {
+      title: "Canton Network",
+      subtitle: "Enterprise-grade infrastructure",
+      stat: "1.2M+",
+      statLabel: "Transactions"
+    },
+    {
+      title: "Secure Assets",
+      subtitle: "Privacy-first design",
+      stat: "99.9%",
+      statLabel: "Uptime"
+    }
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % carouselSlides.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % carouselSlides.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + carouselSlides.length) % carouselSlides.length);
+  };
 
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault();
@@ -96,79 +134,72 @@ const Hero = () => {
             </motion.div>
           </motion.div>
 
-          {/* Right Section - Device Mockups */}
+          {/* Right Section - Simple Carousel */}
           <motion.div 
             className="flex-1 relative flex justify-center items-center"
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className="relative w-full max-w-md lg:max-w-lg h-[400px] lg:h-[480px]">
-              {/* Phone 1 - Left */}
-              <motion.div 
-                className="absolute left-0 top-1/2 -translate-y-1/2 z-10"
-                animate={{ y: [-10, 10, -10] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <div className="w-36 lg:w-44 h-64 lg:h-80 bg-gradient-to-b from-gray-800 to-gray-900 rounded-3xl p-2 shadow-2xl shadow-purple-500/30 border border-white/10">
-                  <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl overflow-hidden relative">
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/50" />
-                    <div className="absolute bottom-4 left-3 right-3">
-                      <div className="text-white text-xs font-semibold mb-1">Global Markets</div>
-                      <div className="text-white/70 text-[10px]">Real-time data sync</div>
+            <div className="relative w-full max-w-md">
+              {/* Carousel Container */}
+              <div className="relative bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20 p-8 overflow-hidden min-h-[320px]">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentSlide}
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -50 }}
+                    transition={{ duration: 0.4 }}
+                    className="text-center"
+                  >
+                    <div className="text-white/60 text-sm uppercase tracking-wider mb-2">
+                      {carouselSlides[currentSlide].subtitle}
                     </div>
-                    <div className="absolute top-4 right-3 w-7 h-7 bg-white/20 rounded-full backdrop-blur-sm flex items-center justify-center">
-                      <div className="w-3 h-3 border-2 border-white rounded-full" />
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Phone 2 - Center */}
-              <motion.div 
-                className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-20"
-                animate={{ y: [10, -10, 10] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-              >
-                <div className="w-44 lg:w-52 h-80 lg:h-96 bg-gradient-to-b from-gray-800 to-gray-900 rounded-3xl p-2 shadow-2xl shadow-purple-500/40 border border-white/10">
-                  <div className="w-full h-full bg-gradient-to-br from-indigo-500 to-purple-700 rounded-2xl overflow-hidden relative">
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/50" />
-                    <div className="absolute top-6 left-3 right-3">
-                      <div className="text-white/60 text-[10px] uppercase tracking-wider mb-1">Network Status</div>
-                      <div className="text-white text-base font-bold">Canton Network</div>
-                    </div>
-                    <div className="absolute bottom-6 left-3 right-3">
-                      <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3">
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="text-white/70 text-xs">Transactions</span>
-                          <span className="text-green-400 text-xs">● Live</span>
-                        </div>
-                        <div className="text-white text-xl font-bold">1.2M+</div>
+                    <h3 className="text-white text-2xl md:text-3xl font-bold mb-8">
+                      {carouselSlides[currentSlide].title}
+                    </h3>
+                    
+                    <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 mb-6">
+                      <div className="text-white text-5xl md:text-6xl font-bold mb-2">
+                        {carouselSlides[currentSlide].stat}
+                      </div>
+                      <div className="text-white/70 text-sm">
+                        {carouselSlides[currentSlide].statLabel}
                       </div>
                     </div>
-                  </div>
-                </div>
-              </motion.div>
+                  </motion.div>
+                </AnimatePresence>
 
-              {/* Phone 3 - Right */}
-              <motion.div 
-                className="absolute right-0 top-1/2 -translate-y-1/2 z-10"
-                animate={{ y: [-8, 12, -8] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-              >
-                <div className="w-36 lg:w-44 h-64 lg:h-80 bg-gradient-to-b from-gray-800 to-gray-900 rounded-3xl p-2 shadow-2xl shadow-purple-500/30 border border-white/10">
-                  <div className="w-full h-full bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl overflow-hidden relative">
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/50" />
-                    <div className="absolute bottom-4 left-3 right-3">
-                      <div className="text-white text-xs font-semibold mb-1">Secure Assets</div>
-                      <div className="text-white/70 text-[10px]">Privacy-first design</div>
-                    </div>
-                    <div className="absolute top-4 left-3 w-10 h-10 bg-white/20 rounded-xl backdrop-blur-sm flex items-center justify-center">
-                      <div className="w-5 h-5 border-2 border-white rounded-md" />
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
+                {/* Navigation Arrows */}
+                <button
+                  onClick={prevSlide}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-colors"
+                >
+                  <ChevronLeft className="w-5 h-5 text-white" />
+                </button>
+                <button
+                  onClick={nextSlide}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-colors"
+                >
+                  <ChevronRight className="w-5 h-5 text-white" />
+                </button>
+              </div>
+
+              {/* Dots Indicator */}
+              <div className="flex justify-center gap-2 mt-6">
+                {carouselSlides.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentSlide(index)}
+                    className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                      currentSlide === index
+                        ? 'bg-white w-8'
+                        : 'bg-white/40 hover:bg-white/60'
+                    }`}
+                  />
+                ))}
+              </div>
             </div>
           </motion.div>
         </div>
