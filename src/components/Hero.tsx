@@ -20,40 +20,28 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-[#1a0a2e] via-[#2d1b4e] to-[#1a0a2e]">
-      {/* Gradient Orbs */}
-      <div className="absolute top-20 left-10 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl" />
-      <div className="absolute bottom-40 right-10 w-80 h-80 bg-indigo-500/20 rounded-full blur-3xl" />
+    <section className="relative min-h-screen overflow-hidden">
+      {/* Main Gradient Background */}
+      <div 
+        className="absolute inset-0"
+        style={{
+          background: 'linear-gradient(135deg, #7c3aed 0%, #8b5cf6 25%, #a78bfa 50%, #7c3aed 75%, #6d28d9 100%)',
+        }}
+      />
       
-      {/* City Skyline */}
-      <div className="absolute bottom-24 left-0 right-0 h-48 opacity-20">
-        <svg viewBox="0 0 1440 200" className="w-full h-full" preserveAspectRatio="none">
-          <path fill="currentColor" className="text-purple-900" d="M0,200 L0,120 L40,120 L40,100 L60,100 L60,120 L80,120 L80,80 L100,80 L100,60 L120,60 L120,80 L140,80 L140,120 L180,120 L180,90 L200,90 L200,70 L220,70 L220,90 L240,90 L240,120 L280,120 L280,100 L320,100 L320,50 L340,50 L340,30 L360,30 L360,50 L380,50 L380,100 L420,100 L420,120 L460,120 L460,80 L480,80 L480,40 L500,40 L500,80 L520,80 L520,120 L560,120 L560,90 L600,90 L600,120 L640,120 L640,70 L660,70 L660,40 L680,40 L680,70 L700,70 L700,120 L740,120 L740,100 L780,100 L780,60 L800,60 L800,100 L820,100 L820,120 L860,120 L860,80 L900,80 L900,50 L920,50 L920,80 L940,80 L940,120 L980,120 L980,90 L1020,90 L1020,120 L1060,120 L1060,70 L1100,70 L1100,40 L1120,40 L1120,70 L1140,70 L1140,120 L1180,120 L1180,100 L1220,100 L1220,120 L1260,120 L1260,80 L1300,80 L1300,120 L1340,120 L1340,90 L1380,90 L1380,120 L1440,120 L1440,200 Z" />
-        </svg>
-      </div>
+      {/* Dotted Grid Pattern Overlay */}
+      <div 
+        className="absolute inset-0 opacity-30"
+        style={{
+          backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.4) 1px, transparent 1px)',
+          backgroundSize: '24px 24px',
+        }}
+      />
       
-      {/* Floating Particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(25)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-white/30 rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 80}%`,
-            }}
-            animate={{
-              y: [-20, 20, -20],
-              opacity: [0.2, 0.6, 0.2],
-            }}
-            transition={{
-              duration: 3 + Math.random() * 2,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-            }}
-          />
-        ))}
-      </div>
+      {/* Gradient Orbs for depth */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-purple-400/30 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-violet-600/40 rounded-full blur-3xl" />
+      <div className="absolute top-1/2 left-1/3 w-[400px] h-[400px] bg-indigo-400/20 rounded-full blur-3xl" />
 
       <div className="container mx-auto px-6 pt-28 pb-8 relative z-10 min-h-screen flex flex-col">
         <div className="flex-1 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
